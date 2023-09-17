@@ -39,7 +39,10 @@ class RegisteredUserController extends Controller
             'password'     => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = DB::transaction(function () use ($request) {
+        // If the request is valid then create both a user and organisation record.
+        DB::beginTransaction();
+        try {
+
             $user = User::create([
                 'name'     => $request->name,
                 'email'    => $request->email,
@@ -50,8 +53,11 @@ class RegisteredUserController extends Controller
                 'name' => $request->organisation
             ]);
 
-            return $user;
-        });
+            DB::commit();
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
 
         event(new Registered($user));
 
