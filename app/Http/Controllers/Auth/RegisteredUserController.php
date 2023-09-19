@@ -43,16 +43,18 @@ class RegisteredUserController extends Controller
         DB::beginTransaction();
         try {
 
-            $user = User::create([
-                'name'     => $request->name,
-                'email'    => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-
-            Organisation::create([
+            $organisation = Organisation::create([
                 'name' => $request->organisation
             ]);
 
+            $user = User::create([
+                'name'            => $request->name,
+                'role'            => 'admin',
+                'email'           => $request->email,
+                'password'        => Hash::make($request->password),
+                'organisation_id' => $organisation->id,
+            ]);
+            
             DB::commit();
 
         } catch (\Exception $e) {
