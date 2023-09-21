@@ -54,7 +54,6 @@ class RegisteredUserController extends Controller
                 'password'        => Hash::make($request->password),
                 'organisation_id' => $organisation->id,
             ]);
-            
             DB::commit();
 
         } catch (\Exception $e) {
