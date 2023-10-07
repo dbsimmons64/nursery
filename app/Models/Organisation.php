@@ -25,4 +25,9 @@ class Organisation extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function nurseries(): HasMany
+    {
+        return $this->hasMany(Nursery::class);
+    }
 }

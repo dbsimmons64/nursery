@@ -45,7 +45,7 @@ class AdminNurseryController extends Controller
      */
     public function show(Nursery $nursery)
     {
-        //
+        dd('show called');
     }
 
     /**

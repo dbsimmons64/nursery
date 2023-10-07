@@ -29,12 +29,15 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/nurseries', [NurseryController::class, 'index'])->name('nursery.index');
-
+    Route::get('/nurseries/{id}', [NurseryController::class, 'show'])->name('nursery.show');
+    Route::delete('/nurseries/{nursery}', [NurseryController::class, 'destroy'])->name('nursery.destroy');
 
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:super'])->group(function () {
     Route::get('/nurseries', [AdminNurseryController::class, 'index'])->name('nursery.index');
+    Route::get('/nurseries/{id}', [AdminNurseryController::class, 'show'])->name('nursery.show');
+    Route::delete('/nurseries/{id}', [AdminNurseryController::class, 'destroy'])->name('nursery.destroy');
 });
 
 require __DIR__.'/auth.php';

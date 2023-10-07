@@ -14,8 +14,8 @@ class NurseryController extends Controller
      */
     public function index()
     {
-        
-        $nurseries = Nursery::organisation()->get();
+
+        $nurseries = Nursery::organisation()->select('id', 'name')->get();
         return view('nursery.index', [
             'nurseries' => $nurseries
         ]);
@@ -43,7 +43,8 @@ class NurseryController extends Controller
      */
     public function show(Nursery $nursery)
     {
-        //
+        dd('show called');
+        return "show";
     }
 
     /**
@@ -67,6 +68,7 @@ class NurseryController extends Controller
      */
     public function destroy(Nursery $nursery)
     {
-        //
+        $nursery->delete();
+        return redirect()->route('nursery.index')->with('success', 'Task deleted successfully');
     }
 }
