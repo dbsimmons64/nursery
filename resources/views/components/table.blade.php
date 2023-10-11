@@ -51,7 +51,7 @@
                                 <a
                                     href="#"
                                     x-data=""
-                                    x-on:click.prevent="$dispatch('open-modal', { target: 'confirm-{{$resource}}-delete', url: '{{ route($resource . '.' . $action, ['nursery' => $rowData->id]) }}' })"
+                                    x-on:click.prevent="$dispatch('open-modal', { target: 'confirm-{{$resource}}-delete', url: '{{ route($resource . '.' . $action, ['id' => $rowData->id]) }}' })"
                                 >{{ $action }}
                                 </a>
                             @endif

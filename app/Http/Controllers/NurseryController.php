@@ -6,6 +6,7 @@ use App\Http\Requests\StoreNurseryRequest;
 use App\Http\Requests\UpdateNurseryRequest;
 use App\Models\Nursery;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Scalar\String_;
 
 class NurseryController extends Controller
 {
@@ -35,24 +36,34 @@ class NurseryController extends Controller
      */
     public function store(StoreNurseryRequest $request)
     {
-        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Nursery $nursery)
+    public function show(\Request $request, string $id)
     {
-        dd('show called');
-        return "show";
+        $nursery = Nursery::organisation()
+            ->where('id', $id)
+            ->firstOrFail();
+
+        return view('nursery.show', [
+            'nursery' => $nursery
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Nursery $nursery)
+    public function edit(\Request $request, string $id)
     {
-        //
+        $nursery = Nursery::organisation()
+            ->where('id', $id)
+            ->firstOrFail();
+
+        return view('nursery.edit', [
+            'nursery' => $nursery
+        ]);
     }
 
     /**
@@ -66,9 +77,14 @@ class NurseryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Nursery $nursery)
+    public function destroy(\Request $request, string $id)
     {
+        $nursery = Nursery::organisation()
+            ->where('id', $id)
+            ->first();
+
         $nursery->delete();
+
         return redirect()->route('nursery.index')->with('success', 'Task deleted successfully');
     }
 }

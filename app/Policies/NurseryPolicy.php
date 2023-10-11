@@ -13,7 +13,7 @@ class NurseryPolicy
      */
     public function viewAny(User $user): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -29,7 +29,7 @@ class NurseryPolicy
      */
     public function create(User $user): bool
     {
-        //
+        return $user->role == 'admin';
     }
 
     /**
@@ -37,7 +37,8 @@ class NurseryPolicy
      */
     public function update(User $user, Nursery $nursery): bool
     {
-        //
+        return true;
+
     }
 
     /**
@@ -45,7 +46,8 @@ class NurseryPolicy
      */
     public function delete(User $user, Nursery $nursery): bool
     {
-        //
+        return true;
+
     }
 
     /**

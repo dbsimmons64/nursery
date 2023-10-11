@@ -9,7 +9,7 @@
         <x-table
             :table-data="$nurseries"
             resource="nursery"
-            :actions="['show', 'destroy']"
+            :actions="['show', 'edit', 'destroy']"
         />
     </x-section>
 
